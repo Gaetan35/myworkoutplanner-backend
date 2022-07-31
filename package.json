@@ -26,7 +26,7 @@
     "typeorm:schema:drop": "yarn typeorm schema:drop -d src/database/config/data-source.ts",
     "typeorm:migration:run": "yarn typeorm migration:run -d src/database/config/data-source.ts",
     "typeorm:migration:revert": "yarn typeorm migration:revert -d src/database/config/data-source.ts",
-    "heroku-postbuild": "yarn typeorm:migration:run"
+    "heroku-postbuild": "yarn build && yarn typeorm:migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
