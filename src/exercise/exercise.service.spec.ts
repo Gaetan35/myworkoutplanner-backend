@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { IdGeneratorService } from '../common/id-generator.service';
 import { Exercise } from '../database/entities';
 import { ExerciseRepository } from '../database/repositories/exercise.repository';
 import { ExerciseService } from './exercise.service';
@@ -10,6 +11,12 @@ describe('ExerciseService', () => {
 
   const mockExerciseRepository = {
     findAll: jest.fn(() => Promise.resolve([exercise])),
+    save: jest.fn((exercise) => Promise.resolve(exercise)),
+  };
+
+  const exerciseId = 'exerciseId';
+  const mockIdGeneratorService = {
+    new: jest.fn(() => exerciseId),
   };
 
   beforeEach(async () => {
@@ -17,6 +24,7 @@ describe('ExerciseService', () => {
       providers: [
         ExerciseService,
         { provide: ExerciseRepository, useValue: mockExerciseRepository },
+        { provide: IdGeneratorService, useValue: mockIdGeneratorService },
       ],
     }).compile();
 
@@ -27,7 +35,7 @@ describe('ExerciseService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('getAllExercises', () => {
+  describe('getExercises', () => {
     let result: Exercise[];
 
     beforeAll(async () => {
@@ -40,6 +48,34 @@ describe('ExerciseService', () => {
 
     it('should return correct result', () => {
       expect(result).toEqual([exercise]);
+    });
+  });
+
+  describe('createExercise', () => {
+    let result: Exercise;
+    const dto = {
+      name: 'exerciseName',
+      difficulty: 4,
+      description: 'exerciseDescription',
+    };
+    const expectedExercise = Exercise.fromDto(exerciseId, dto);
+
+    beforeAll(async () => {
+      result = await service.createExercise(dto);
+    });
+
+    it('should call idGeneratorService new method ', () => {
+      expect(mockIdGeneratorService.new).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call productsRepository save method with correct params', () => {
+      expect(mockExerciseRepository.save).toHaveBeenCalledWith(
+        expectedExercise,
+      );
+    });
+
+    it('should return correct result', () => {
+      expect(result).toEqual(expectedExercise);
     });
   });
 });
