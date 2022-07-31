@@ -25,6 +25,7 @@
     "typeorm:migration:generate": "yarn typeorm migration:generate src/database/migrations/generated_migration -d src/database/config/data-source.ts",
     "typeorm:schema:drop": "yarn typeorm schema:drop -d src/database/config/data-source.ts",
     "typeorm:migration:run": "yarn typeorm migration:run -d src/database/config/data-source.ts",
+    "typeorm:migration:revert": "yarn typeorm migration:revert -d src/database/config/data-source.ts",
     "heroku-postbuild": "yarn typeorm:migration:run"
   },
   "dependencies": {
