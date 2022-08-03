@@ -1,4 +1,4 @@
-import { IsInt, IsString, Max, Min } from 'class-validator';
+import { IsBoolean, IsInt, IsString, Max, Min } from 'class-validator';
 
 export class CreateExerciseDTO {
   @IsString()
@@ -11,4 +11,7 @@ export class CreateExerciseDTO {
 
   @IsString()
   description: string;
+
+  @IsBoolean()
+  isTimeExercise: boolean;
 }

@@ -2,12 +2,19 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { IdGeneratorService } from '../common/id-generator.service';
 import { Exercise } from '../database/entities';
 import { ExerciseRepository } from '../database/repositories/exercise.repository';
+import { CreateExerciseDTO } from './dto/create-exercise.dto';
 import { ExerciseService } from './exercise.service';
 
 describe('ExerciseService', () => {
   let service: ExerciseService;
 
-  const exercise = new Exercise('exerciseId', 'name', 3, 'exerciseDescription');
+  const exercise = new Exercise(
+    'exerciseId',
+    'name',
+    3,
+    'exerciseDescription',
+    false,
+  );
 
   const mockExerciseRepository = {
     findAll: jest.fn(() => Promise.resolve([exercise])),
@@ -53,10 +60,11 @@ describe('ExerciseService', () => {
 
   describe('createExercise', () => {
     let result: Exercise;
-    const dto = {
+    const dto: CreateExerciseDTO = {
       name: 'exerciseName',
       difficulty: 4,
       description: 'exerciseDescription',
+      isTimeExercise: false,
     };
     const expectedExercise = Exercise.fromDto(exerciseId, dto);
 
