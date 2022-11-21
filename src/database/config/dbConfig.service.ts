@@ -14,14 +14,15 @@ class DbConfigService {
     logging: true,
   } as const;
 
-  private isDevelopment() {
-    return process.env.NODE_ENV === 'development';
-  }
+  // private isDevelopment() {
+  //   return process.env.NODE_ENV === 'development';
+  // }
 
   private getSSLConfig() {
-    if (this.isDevelopment()) return false;
+    return false;
+    // if (this.isDevelopment()) return false;
 
-    return { rejectUnauthorized: false };
+    // return { rejectUnauthorized: false };
   }
 
   getTypeOrmConfig(): TypeOrmModuleOptions {
