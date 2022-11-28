@@ -1,8 +1,3 @@
-{
-  # debug
-  admin 0.0.0.0:2020
-}
-
 35.181.135.91.nip.io {
   reverse_proxy localhost:8080
 }
