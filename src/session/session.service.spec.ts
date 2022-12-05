@@ -12,6 +12,7 @@ describe('SessionService', () => {
     3,
     'exerciseDescription',
     false,
+    [],
   );
 
   const mockExerciseRepository = {

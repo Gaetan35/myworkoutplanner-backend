@@ -1,6 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { CreateExerciseDTO } from '../../exercise/dto/create-exercise.dto';
 import { DatabaseEntity } from './database-entity';
+import { Category } from './categories.entity';
 
 export const exerciseTableName = 'exercises';
 
@@ -18,12 +19,17 @@ export class Exercise extends DatabaseEntity {
   @Column({ nullable: false })
   isTimeExercise: boolean;
 
+  @ManyToMany(() => Category)
+  @JoinTable()
+  categories: Category[];
+
   public constructor(
     id: string,
     name: string,
     difficulty: number,
     description: string,
     isTimeExercise: boolean,
+    categories: Category[],
   ) {
     super();
     this.id = id;
@@ -31,6 +37,7 @@ export class Exercise extends DatabaseEntity {
     this.difficulty = difficulty;
     this.description = description;
     this.isTimeExercise = isTimeExercise;
+    this.categories = categories;
   }
 
   static fromDto(id: string, dto: CreateExerciseDTO) {
@@ -40,6 +47,7 @@ export class Exercise extends DatabaseEntity {
       dto.difficulty,
       dto.description,
       dto.isTimeExercise,
+      [],
     );
   }
 }

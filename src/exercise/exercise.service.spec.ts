@@ -14,6 +14,7 @@ describe('ExerciseService', () => {
     3,
     'exerciseDescription',
     false,
+    [],
   );
 
   const mockExerciseRepository = {

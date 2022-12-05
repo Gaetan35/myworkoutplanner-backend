@@ -11,7 +11,7 @@ export class ExerciseRepository {
   ) {}
 
   findAll(): Promise<Exercise[]> {
-    return this.exerciseTable.find();
+    return this.exerciseTable.find({ relations: ['categories'] });
   }
 
   save(exercise: Exercise): Promise<Exercise> {
