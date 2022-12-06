@@ -23,6 +23,9 @@ export class Exercise extends DatabaseEntity {
   @JoinTable()
   categories: Category[];
 
+  @Column({ nullable: false })
+  imageUrl: string;
+
   public constructor(
     id: string,
     name: string,
@@ -30,6 +33,7 @@ export class Exercise extends DatabaseEntity {
     description: string,
     isTimeExercise: boolean,
     categories: Category[],
+    imageUrl: string,
   ) {
     super();
     this.id = id;
@@ -38,6 +42,7 @@ export class Exercise extends DatabaseEntity {
     this.description = description;
     this.isTimeExercise = isTimeExercise;
     this.categories = categories;
+    this.imageUrl = imageUrl;
   }
 
   static fromDto(id: string, dto: CreateExerciseDTO) {
@@ -48,6 +53,7 @@ export class Exercise extends DatabaseEntity {
       dto.description,
       dto.isTimeExercise,
       [],
+      '',
     );
   }
 }

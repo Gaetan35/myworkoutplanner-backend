@@ -37,3 +37,5 @@ lerna-debug.log*
 .env
 
 local-dev/volumes/
+
+scripts/seeding/data/

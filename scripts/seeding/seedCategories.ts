@@ -2,9 +2,10 @@ import * as uuid from 'uuid';
 import { DataSource } from 'typeorm';
 import { Category } from '../../src/database/entities/categories.entity';
 
-const categories = ['Abs', 'Epaule', 'Pec', 'Jambe', 'Cardio'];
-
-export const createCategories = async (dataSource: DataSource) => {
+export const createCategories = async (
+  dataSource: DataSource,
+  categories: string[],
+) => {
   const existingCategories = await dataSource.getRepository(Category).find();
   if (existingCategories.length !== 0) return;
 
