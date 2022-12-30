@@ -31,7 +31,7 @@ export const createExercises = async (
   );
 
   const imageUrlByFilename = await uploadImages(
-    exercises.map((exercise) => exercise.imageName),
+    exercises.map((exercise) => exercise.imageName).filter(Boolean),
   );
 
   for (const exercise of exercises) {

@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class generatedMigration1670365736894 implements MigrationInterface {
-  name = 'generatedMigration1670365736894';
+export class generatedMigration1672413693469 implements MigrationInterface {
+  name = 'generatedMigration1672413693469';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `ALTER TABLE "exercises" ADD "imageUrl" character varying NOT NULL`,
+      `ALTER TABLE "exercises" ADD "imageUrl" character varying`,
     );
   }
 

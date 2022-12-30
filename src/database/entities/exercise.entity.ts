@@ -23,8 +23,8 @@ export class Exercise extends DatabaseEntity {
   @JoinTable()
   categories: Category[];
 
-  @Column({ nullable: false })
-  imageUrl: string;
+  @Column({ nullable: true })
+  imageUrl?: string;
 
   public constructor(
     id: string,
@@ -33,7 +33,7 @@ export class Exercise extends DatabaseEntity {
     description: string,
     isTimeExercise: boolean,
     categories: Category[],
-    imageUrl: string,
+    imageUrl?: string,
   ) {
     super();
     this.id = id;
