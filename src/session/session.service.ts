@@ -45,8 +45,6 @@ export class SessionService {
       {},
     );
 
-    console.dir(exercisesByCategory, { depth: null });
-
     const restTime = Math.round(Math.random() * 6 + 20);
     const effortTime = Math.round(Math.random() * 6 + 20);
     const serieFormat = {
